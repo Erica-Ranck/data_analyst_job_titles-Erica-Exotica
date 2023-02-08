@@ -19,6 +19,16 @@ LIMIT 10;
 
 -- 3.	How many postings are in Tennessee? How many are there in either Tennessee or Kentucky?
 
+SELECT COUNT(*)
+FROM data_analyst_jobs
+WHERE location = 'TN';
+
+SELECT COUNT(*)
+FROM data_analyst_jobs
+WHERE location = 'TN' OR location = 'KY';
+
+-- there are 21 postings in Tennessee. There are 27 between TN + KY.
+
 -- 4.	How many postings in Tennessee have a star rating above 4?
 
 -- 5.	How many postings in the dataset have a review count between 500 and 1000?
