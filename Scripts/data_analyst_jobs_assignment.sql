@@ -111,28 +111,35 @@ SELECT *
 FROM data_analyst_jobs
 LIMIT 10;
 
-SELECT domain AS industry, COUNT(title)
+SELECT domain AS industry, COUNT(title) as posting_count
 FROM data_analyst_jobs
-WHERE days_since_posting > 21
-GROUP BY industry;
+WHERE days_since_posting > 21 
+	AND skill LIKE '%SQL%'
+	AND domain IS NOT NULL
+GROUP BY industry
+ORDER BY posting_count DESC;
 
 --  - Disregard any postings where the domain is NULL. 
 
-SELECT domain AS industry, COUNT(title)
+SELECT domain AS industry, COUNT(title) as posting_count
 FROM data_analyst_jobs
 WHERE days_since_posting > 21
+	AND skill LIKE '%SQL%'
 	AND domain IS NOT NULL
-GROUP BY industry;
+GROUP BY industry
+ORDER BY posting_count DESC;
 
 --  - Order your results so that the domain with the greatest number of `hard to fill` jobs is at the top. 
 
-SELECT domain AS industry, COUNT(title) as open_jobs
+SELECT domain AS industry, COUNT(title) as posting_count
 FROM data_analyst_jobs
 WHERE days_since_posting > 21
+	AND skill LIKE '%SQL%'
 	AND domain IS NOT NULL
 GROUP BY industry
-ORDER BY open_jobs DESC;
+ORDER BY posting_count DESC;
 
 --   - Which three industries are in the top 4 on this list? How many jobs have been listed for more than 3 weeks for each of the top 4?
 
--- the top 4 industries are consulting and business services (110), health care (96), internet and software (84), and banks and financial institutions (77)
+-- the top 4 industries are internet and software (62), banks and financial institutions (61), consulting and business services (57), health care (52)
+
