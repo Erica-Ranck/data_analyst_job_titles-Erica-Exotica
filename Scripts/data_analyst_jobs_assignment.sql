@@ -75,32 +75,35 @@ WHERE location = 'CA';
 SELECT company, ROUND(AVG(star_rating),2) AS avg_rating
 FROM data_analyst_jobs
 WHERE review_count >5000
+	AND company IS NOT NULL
 GROUP BY company;
 
--- There are 41 companies with more than 5000 reviews across all locations
+-- There are 40 companies with more than 5000 reviews across all locations
 
 -- 10.	Add the code to order the query in #9 from highest to lowest average star rating. Which company with more than 5000 reviews across all locations in the dataset has the highest star rating? What is that rating?
 
-SELECT company, AVG(star_rating) AS avg_rating
+SELECT company, ROUND(AVG(star_rating),2) AS avg_rating
 FROM data_analyst_jobs
 WHERE review_count >5000
 GROUP BY company
 ORDER BY avg_rating DESC;
 
--- The company with the highest avg star rating is GM
+-- The company with the highest avg star rating is GM at 4.2
 
 -- 11.	Find all the job titles that contain the word ‘Analyst’. How many different job titles are there? 
 
 SELECT COUNT(title)
 FROM data_analyst_jobs
-WHERE title LIKE '%Analyst%';
+WHERE LOWER(title) LIKE ('%analyst%');
+
+-- there are 1669 jobs with analyst in the title
 
 -- 12.	How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’? What word do these positions have in common?
 
 SELECT title
 FROM data_analyst_jobs
-WHERE UPPER(title) NOT LIKE UPPER('%Analyst%') 
-	AND UPPER(title) NOT LIKE UPPER('%Analytics%');
+WHERE UPPER(title) NOT LIKE UPPER('%analyst%') 
+	AND UPPER(title) NOT LIKE UPPER('%analytics%');
 	
 -- The word in common with these positions is Tableau
 
