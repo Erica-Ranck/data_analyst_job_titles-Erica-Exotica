@@ -48,7 +48,7 @@ WHERE review_count BETWEEN 500 AND 1000;
 
 -- 6.	Show the average star rating for companies in each state. The output should show the state as `state` and the average rating for the state as `avg_rating`. Which state shows the highest average rating?
 
-SELECT location AS state, AVG(star_rating) AS avg_rating
+SELECT location AS state, ROUND(AVG(star_rating),2) AS avg_rating
 FROM data_analyst_jobs
 GROUP BY state
 ORDER BY avg_rating desc;
@@ -72,7 +72,7 @@ WHERE location = 'CA';
 
 -- 9.	Find the name of each company and its average star rating for all companies that have more than 5000 reviews across all locations. How many companies are there with more that 5000 reviews across all locations?
 
-SELECT company, AVG(star_rating) AS avg_rating
+SELECT company, ROUND(AVG(star_rating),2) AS avg_rating
 FROM data_analyst_jobs
 WHERE review_count >5000
 GROUP BY company;
